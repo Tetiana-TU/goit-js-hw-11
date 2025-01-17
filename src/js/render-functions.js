@@ -1,11 +1,5 @@
-// export const createGalleryCardTemplate = imgInfo => {
-//     return `<li class="gallery-card">
-//      <img class="gallery-img"src="${imgInfo.webformatURL}" alt="${imgInfo.tags}"/>
-//       </li>`;
-//   };
-
-  export const createGalleryCardTemplate = imgInfo => {
-    return `<li class="gallery-card">
+export const createGalleryCardTemplate = imgInfo => {
+  return `<li class="gallery-card">
             <article class="card">
             <a class="gallery-link" href="${imgInfo.largeImageURL}" target="_blank" rel="noopener noreferrer">
               <img class="gallery-img" src="${imgInfo.webformatURL}" alt="${imgInfo.tags}" />
@@ -29,4 +23,5 @@
               </div>
             </div>
           </article>
-        </li>`;};
+        </li>`;
+};
