@@ -1,4 +1,26 @@
-import{i as l}from"./assets/vendor-17o45ynk.js";(function(){const s=document.createElement("link").relList;if(s&&s.supports&&s.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))i(e);new MutationObserver(e=>{for(const r of e)if(r.type==="childList")for(const c of r.addedNodes)c.tagName==="LINK"&&c.rel==="modulepreload"&&i(c)}).observe(document,{childList:!0,subtree:!0});function t(e){const r={};return e.integrity&&(r.integrity=e.integrity),e.referrerPolicy&&(r.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?r.credentials="include":e.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function i(e){if(e.ep)return;e.ep=!0;const r=t(e);fetch(e.href,r)}})();const n=document.querySelector(".js-search-form"),a=document.querySelector(".js-gallery"),u=o=>`<li class="gallery-card">
-   <img class="gallery-img"src="${o.webformatURL}" alt="${o.tags}"/>
-    </li>`,f=o=>{o.preventDefault();const s=o.currentTarget.elements.user_query.value;fetch(`https://pixabay.com/api/?key=48265594-3edacf02e8cadda91195713cc&q=${s}&image_type=photo&orientation=horizontal&safesearch=true`).then(t=>{if(!t.ok)throw new Error(t.status);return t.json()}).then(t=>{if(t.total===0){l.error({message:'"Sorry, there are no images matching your search query. Please try again!"',position:"topRight"}),a.innerHTML="",n.reset();return}const i=t.hits.map(e=>u(e)).join("");a.innerHTML=i}).catch(t=>{console.log(t)})};n.addEventListener("submit",f);
+import{i as n}from"./assets/vendor-17o45ynk.js";(function(){const l=document.createElement("link").relList;if(l&&l.supports&&l.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))a(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const o of t.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&a(o)}).observe(document,{childList:!0,subtree:!0});function s(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function a(e){if(e.ep)return;e.ep=!0;const t=s(e);fetch(e.href,t)}})();const u=r=>`<li class="gallery-card">
+            <article class="card">
+            <a class="gallery-link" href="${r.largeImageURL}" target="_blank" rel="noopener noreferrer">
+              <img class="gallery-img" src="${r.webformatURL}" alt="${r.tags}" />
+            </a>
+            <div class="gallery-container">
+              <div class="gallery-item">
+                <p class="gallery-title">Likes</p>
+                <p class="gallery-count">${r.likes}</p>
+              </div>
+              <div class="gallery-item">
+                <p class="gallery-title">Views</p>
+                <p class="gallery-count">${r.views}</p>
+              </div>
+              <div class="gallery-item">
+                <p class="gallery-title">Comments</p>
+                <p class="gallery-count">${r.comments}</p>
+              </div>
+              <div class="gallery-item">
+                <p class="gallery-title">Downloads</p>
+                <p class="gallery-count">${r.downloads}</p>
+              </div>
+            </div>
+          </article>
+        </li>`,d=r=>{const l=new URLSearchParams({q:r,key:"48265594-3edacf02e8cadda91195713cc",image_type:"photo",orientation:"horizontal",safesearch:"true"});return fetch(`https://pixabay.com/api/?${l}`).then(s=>{if(!s.ok)throw new Error(s.status);return s.json()})},i=document.querySelector(".js-search-form"),c=document.querySelector(".js-gallery"),y=r=>{r.preventDefault();const l=r.currentTarget.elements.user_query.value.trim();if(l===""){alert("Поле має бути заповнено!");return}d(l).then(s=>{if(s.total===0){n.error({message:'"Sorry, there are no images matching your search query. Please try again!"',position:"topRight"}),c.innerHTML="",i.reset();return}const a=s.hits.map(e=>u(e)).join("");c.innerHTML=a}).catch(s=>{console.log(s)})};i.addEventListener("submit",y);
 //# sourceMappingURL=index.js.map
