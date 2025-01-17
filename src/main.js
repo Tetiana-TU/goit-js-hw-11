@@ -19,6 +19,7 @@ const onSearchFormSubmit = event => {
     });
     return;
   }
+  loader.classList.remove('is-hidden');
   fetchPhotosByQuery(searchedQuery)
     .then(data => {
       if (data.total === 0) {
@@ -32,11 +33,17 @@ const onSearchFormSubmit = event => {
         searchFormEl.reset();
         return;
       }
-      loader.classList.remove('is-hidden');
+
       const galleryTemplate = data.hits
         .map(el => createGalleryCardTemplate(el))
         .join('');
       galleryEl.innerHTML = galleryTemplate;
+      loader.classList.add('is-hidden');
+      const gallery = new SimpleLightbox('.js-gallery a', {
+        captionDelay: 300,
+        captionsData: 'alt',
+      });
+      gallery.refresh();
     })
     .catch(err => {
       loader.style.display = 'none';
@@ -46,10 +53,3 @@ const onSearchFormSubmit = event => {
 };
 
 searchFormEl.addEventListener('submit', onSearchFormSubmit);
-
-const gallery = new SimpleLightbox('.js-gallery a', {
-  captionDelay: 300,
-  captionsData: 'alt',
-});
-
-gallery.refresh();
